@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="tile" x1="48" y1="30" x2="454" y2="486" gradientUnits="userSpaceOnUse"><stop stop-color="#252a33"/><stop offset="1" stop-color="#111419"/></linearGradient>
+    <linearGradient id="red" x1="113" y1="144" x2="406" y2="354" gradientUnits="userSpaceOnUse"><stop stop-color="#f43b43"/><stop offset="1" stop-color="#c90820"/></linearGradient>
+    <linearGradient id="glass" x1="187" y1="202" x2="325" y2="341" gradientUnits="userSpaceOnUse"><stop stop-color="#f7f8fa"/><stop offset="1" stop-color="#aeb8c6"/></linearGradient>
+    <filter id="shadow" x="63" y="105" width="386" height="316" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity=".32"/></filter>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#tile)"/>
+  <path d="M118 143h75l35-40h80l35 40h51c26 0 47 21 47 47v154c0 26-21 47-47 47H118c-26 0-47-21-47-47V190c0-26 21-47 47-47Z" fill="url(#red)" filter="url(#shadow)"/>
+  <path d="M71 221h370v123c0 26-21 47-47 47H118c-26 0-47-21-47-47V221Z" fill="#c90d23" opacity=".34"/>
+  <circle cx="256" cy="263" r="91" fill="#8b0b1b" opacity=".42"/><circle cx="256" cy="256" r="78" fill="url(#glass)"/><circle cx="256" cy="256" r="62" fill="#202733"/><circle cx="256" cy="256" r="47" fill="#111820"/><circle cx="256" cy="256" r="33" fill="#263f58"/><circle cx="256" cy="256" r="21" fill="#111820"/>
+  <path d="M268 239a22 22 0 0 0-25 31 22 22 0 0 1 25-31Z" fill="#f3f6fa" opacity=".82"/><circle cx="374" cy="188" r="13" fill="#fff" opacity=".95"/><circle cx="374" cy="188" r="7" fill="#e3152b"/>
+  <path d="M143 419h226" stroke="#f43b43" stroke-linecap="round" stroke-width="10" opacity=".94"/>
+</svg>
