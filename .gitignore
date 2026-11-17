@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.zip
+EN-HCNetSDKV6.1.9.4_build20220412_linux64/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
