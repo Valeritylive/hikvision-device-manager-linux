@@ -1,22 +1,33 @@
 # Hikvision Device Manager для Linux
 
+Бесплатная графическая программа с открытым исходным кодом для обнаружения и базового обслуживания устройств Hikvision в локальной сети. Интерфейс построен на GTK 4; поиск совместимых устройств выполняется по локальному SADP-протоколу через UDP-порт 37020.
+
+Поддерживаются Linux amd64 и два готовых формата установки: AppImage и Debian/Ubuntu `.deb`. HCNetSDK не входит в сборки и устанавливается отдельно, если нужны операции, которые зависят от SDK.
+
 ## AppImage
 
-Готовая сборка `HikvisionDeviceManager-x86_64.AppImage` публикуется во вкладке [Actions](https://github.com/Valeritylive/hikvision-device-manager-linux/actions): откройте последний запуск **Build AppImage** и скачайте его артефакт.
-
-Чтобы запустить файл:
+Скачайте `HikvisionDeviceManager-x86_64.AppImage` со страницы [последнего релиза](https://github.com/Valeritylive/hikvision-device-manager-linux/releases/latest). Откройте терминал в каталоге загрузки и запустите:
 
 ```bash
 chmod +x HikvisionDeviceManager-x86_64.AppImage
 ./HikvisionDeviceManager-x86_64.AppImage
 ```
 
-Сборка AppImage запускается автоматически при обновлении ветки `main`. Собрать её вручную на Linux x86_64 можно командой `bash build-appimage.sh`; нужен интернет для загрузки средств сборки и библиотек. HCNetSDK в образ не включён: это отдельная библиотека Hikvision, её можно указать через `HIKVISION_HCNETSDK_LIBRARY`.
+Собрать AppImage вручную на Linux x86_64 можно командой `bash build-appimage.sh`; потребуются `wget`, `file` и доступ к Интернету для загрузки инструментов сборки и библиотек. Исходный код приложения и GTK/GStreamer/Python-пакеты включаются в образ. HCNetSDK не включён; функции через SDK требуют отдельной установки официальной библиотеки и указания `HIKVISION_HCNETSDK_LIBRARY`.
 
+## Пакет Debian/Ubuntu (.deb)
 
-Графическая программа для обнаружения и базового обслуживания устройств Hikvision в локальной сети. Интерфейс построен на GTK 4; поиск отправляет SADP inquiry по UDP на порт 37020.
+Скачайте `hikvision-device-manager_1.0.0-1_amd64.deb` со страницы [последнего релиза](https://github.com/Valeritylive/hikvision-device-manager-linux/releases/latest), затем установите его командой:
 
-## Запуск на Debian/Ubuntu
+```bash
+sudo apt install ./hikvision-device-manager_1.0.0-1_amd64.deb
+```
+
+Пакет предназначен для Debian/Ubuntu amd64 и содержит Python, GTK 4 и GStreamer, поэтому отдельно устанавливать зависимости Python не нужно. После установки приложение появится в меню программ; его также можно запустить командой `hikvision-device-manager`. Релиз включает оба готовых пакета. Непомеченные релизные сборки также доступны в артефактах GitHub Actions.
+
+Для сборки `.deb` вручную сначала выполните `bash build-appimage.sh`, затем `bash build-deb.sh`. Для AppImage достаточно `bash build-appimage.sh`; для загрузки инструментов и библиотек требуется доступ к Интернету.
+
+## Запуск из исходников на Debian/Ubuntu
 
 Установите системные зависимости:
 

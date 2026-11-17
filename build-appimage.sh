@@ -28,19 +28,24 @@ if [[ ! -x "$CONDA_PLUGIN" ]]; then
   chmod +x "$CONDA_PLUGIN"
 fi
 
+# The Conda plugin's fresh Miniconda setup writes an Anaconda defaults channel
+# config into the prefix. Remove it so noninteractive builds use conda-forge
+# only and do not require accepting unrelated Anaconda Terms of Service.
+if ! grep -q 'rm -f.*usr/conda/.condarc' "$CONDA_PLUGIN"; then
+  sed -i '/bash "\$CONDA_DOWNLOAD_DIR"\/"\$miniconda_installer_filename" -b -p "\$APPDIR"\/usr\/conda -f/a\rm -f "$APPDIR"/usr/conda/.condarc' \
+    "$CONDA_PLUGIN"
+fi
+sed -i '/config --remove channels defaults/d' "$CONDA_PLUGIN"
+if ! grep -q 'conda remove -y conda-anaconda-tos' "$CONDA_PLUGIN"; then
+  sed -i '/conda config --add channels conda-forge/a\"$APPDIR"/usr/conda/bin/conda remove -y conda-anaconda-tos' \
+    "$CONDA_PLUGIN"
+fi
+
 install -m 0644 "$ROOT_DIR/app.py" "$ROOT_DIR/hikvision_api.py" \
   "$ROOT_DIR/hikvision_sdk.py" "$APPDIR/usr/share/hikvision-device-manager/"
 
-cat > "$APPDIR/usr/share/icons/hicolor/scalable/apps/hikvision-device-manager.svg" <<'SVG'
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <rect x="8" y="8" width="112" height="112" rx="26" fill="#172a46"/>
-  <path d="M27 43h17l8-10h26l8 10h5a11 11 0 0 1 11 11v34a11 11 0 0 1-11 11H27a11 11 0 0 1-11-11V54a11 11 0 0 1 11-11Z" fill="#3978d4"/>
-  <circle cx="64" cy="69" r="22" fill="#dceaff"/>
-  <circle cx="64" cy="69" r="14" fill="#172a46"/>
-  <circle cx="64" cy="69" r="8" fill="#78b7ff"/>
-  <circle cx="91" cy="55" r="4" fill="#b9ffd3"/>
-</svg>
-SVG
+install -m 0644 "$ROOT_DIR/assets/hikvision-device-manager.svg" \
+  "$APPDIR/usr/share/icons/hicolor/scalable/apps/hikvision-device-manager.svg"
 
 cat > "$APPDIR/hikvision-device-manager.desktop" <<'DESKTOP'
 [Desktop Entry]
