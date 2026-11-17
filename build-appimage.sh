@@ -79,7 +79,7 @@ APPRUN
 chmod 0755 "$APPDIR/AppRun"
 
 export CONDA_CHANNELS="conda-forge"
-export CONDA_PACKAGES="python=3.12 pygobject gtk4 gstreamer gst-python gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav requests cryptography"
+export CONDA_PACKAGES="python=3.12;pygobject;gtk4;gstreamer;gst-python;gst-plugins-base;gst-plugins-good;gst-plugins-bad;gst-libav;requests;cryptography"
 export APPIMAGE_EXTRACT_AND_RUN=1
 
 cd "$OUTPUT_DIR"
