@@ -1,5 +1,19 @@
 # Hikvision Device Manager для Linux
 
+## AppImage
+
+Готовая сборка `HikvisionDeviceManager-x86_64.AppImage` публикуется во вкладке [Actions](https://github.com/Valeritylive/hikvision-device-manager-linux/actions): откройте последний запуск **Build AppImage** и скачайте его артефакт.
+
+Чтобы запустить файл:
+
+```bash
+chmod +x HikvisionDeviceManager-x86_64.AppImage
+./HikvisionDeviceManager-x86_64.AppImage
+```
+
+Сборка AppImage запускается автоматически при обновлении ветки `main`. Собрать её вручную на Linux x86_64 можно командой `bash build-appimage.sh`; нужен интернет для загрузки средств сборки и библиотек. HCNetSDK в образ не включён: это отдельная библиотека Hikvision, её можно указать через `HIKVISION_HCNETSDK_LIBRARY`.
+
+
 Графическая программа для обнаружения и базового обслуживания устройств Hikvision в локальной сети. Интерфейс построен на GTK 4; поиск отправляет SADP inquiry по UDP на порт 37020.
 
 ## Запуск на Debian/Ubuntu
