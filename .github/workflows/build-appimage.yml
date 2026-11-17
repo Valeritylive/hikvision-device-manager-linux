@@ -1,26 +1,43 @@
-name: Build AppImage
+name: Build Linux packages
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+
       - name: Install AppImage host tools
         run: |
           sudo apt-get update
           sudo apt-get install -y file wget libfuse2
+
       - name: Build AppImage
         run: bash build-appimage.sh
+
+      - name: Build Debian package
+        run: bash build-deb.sh
+
       - name: Upload AppImage
         uses: actions/upload-artifact@v4
         with:
           name: HikvisionDeviceManager-x86_64-AppImage
           path: dist/HikvisionDeviceManager-x86_64.AppImage
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload Debian package
+        uses: actions/upload-artifact@v4
+        with:
+          name: HikvisionDeviceManager-amd64-DEB
+          path: dist/hikvision-device-manager_1.0.0-1_amd64.deb
           if-no-files-found: error
           retention-days: 30
