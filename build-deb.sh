@@ -72,6 +72,6 @@ Description: Hikvision device discovery and management for Linux
 CONTROL
 
 OUTPUT_PACKAGE="$OUTPUT_DIR/${PACKAGE_NAME}_${VERSION}-1_amd64.deb"
-dpkg-deb --root-owner-group --build --compression=xz --uniform-compression \
+dpkg-deb --root-owner-group --build -Zxz --uniform-compression \
   "$PACKAGE_ROOT" "$OUTPUT_PACKAGE"
 printf 'Готово: %s\n' "$OUTPUT_PACKAGE"
